@@ -1,0 +1,26 @@
+.tnx {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #255658;
+  color: #b2dcff;
+}
+
+.tnx h2 {
+  font-size: 2.5rem;
+}
+
+.tnx p {
+  font-size: 1.5rem;
+}
+
+.tnx p a:visited {
+  color: inherit;
+}
+
+.tnx p a:hover {
+  color: #f4f6fa;
+}

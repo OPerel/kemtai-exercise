@@ -1,13 +1,19 @@
 import React, {useEffect} from 'react';
+import './AnglesView.css';
+import { useHistory } from 'react-router-dom';
 import Counters from '../Counters/Counters';
-import './AnglesView.css'
+import {ROUTES} from "../../utils/constants";
 
 const AnglesView: React.FC = () => {
+
+  const history = useHistory();
+
   useEffect(() => {
     setTimeout(() => {
-      // redirect to thank you page
+      history.push(ROUTES.TNX);
     }, 1000 * 60);
-  })
+  });
+
   return (
     <div className="angles-view">
       <Counters />
