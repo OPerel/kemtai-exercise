@@ -1,0 +1,17 @@
+.angle-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 95px;
+  border-radius: 15%;
+  background-color: #000;
+}
+
+.angle-counter p {
+  margin: 0;
+  padding-bottom: 10px;
+  color: #fff;
+  font-size: 6rem;
+  font-weight: 100;
+}
