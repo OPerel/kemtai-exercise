@@ -1,13 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './RandomAngles.css';
-import drawAngle from "../../utils/anglesUtil";
+import DrawAngle from "../../utils/anglesUtil";
 
 interface WindowSize {
   width: number,
   height: number
 }
 
-const RandomAngle: React.FC<{counter: number}> = ({ counter }) => {
+interface RandomAngleProps {
+  counter: number
+}
+
+const RandomAngle: React.FC<RandomAngleProps> = ({ counter }) => {
 
   const [windowSize, setWindowSize] = useState<WindowSize>(getCanvasSize());
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -15,7 +19,8 @@ const RandomAngle: React.FC<{counter: number}> = ({ counter }) => {
   // draw a new angle every time the counter changes
   useEffect(() => {
     if (canvasRef.current) {
-      drawAngle(canvasRef.current)
+      const Draw = new DrawAngle(canvasRef.current);
+      Draw.draw();
     }
   }, [counter]);
 
