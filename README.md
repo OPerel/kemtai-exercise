@@ -1,5 +1,7 @@
 # Kemtai App exercise for NextDevs
 
+### See it live [here](https://ori-kemtai-exercise.netlify.app)
+
 ## Screenshots
 ### Mobile
 #### Home Page
