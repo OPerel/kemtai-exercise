@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './RandomAngles.css';
-import DrawAngle from "../../utils/anglesUtil";
+import DrawAngle from "../../utils/DrawAngle";
 
 interface WindowSize {
   width: number,

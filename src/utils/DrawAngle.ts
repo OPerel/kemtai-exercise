@@ -1,11 +1,17 @@
+/**
+ * Generates 3 random points on a given canvas element.
+ * Calculates 2 angles from a middle point to the other two.
+ * Calculates and renders the arc angle between the two vectors.
+ * Renders two lines with arrowheads along the vectors.
+ */
 class DrawAngle {
-
   /**
-   * Calculate and draw an angle's lines and arc based on 3 random points
+   * Draw an angle's lines and arc based on 3 random points
    * @param canvas - the canvas element
    */
   public draw(canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
     // clear the canvas before next paint
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -17,6 +23,36 @@ class DrawAngle {
     ] = this.getRandomPoints(canvas.width, canvas.height);
 
     // get vectors from x2,y2 to the other points
+    const { lineAngle1, lineAngle2 } = this.getVectors(x1, x2, y1, y2, x3, y3);
+
+    // render the angle's arc
+    this.renderArc(ctx, x2, y2, x1, y1, x3, y3, lineAngle1, lineAngle2);
+
+    // render the angle's text
+    this.renderAngleText(lineAngle1, lineAngle2, x2, y2, ctx);
+
+    // render the two vectors
+    this.renderVectors(ctx, x3, y3, x2, y2, x1, y1);
+  }
+
+  /**
+   * Calculate two vectors from the middle point
+   * @param x1 - first point x position
+   * @param x2 - middle point x
+   * @param y1 - first point y position
+   * @param y2 - middle point y
+   * @param x3 - second point x position
+   * @param y3 - second point y position
+   * @private
+   */
+  private getVectors(
+    x1: number,
+    x2: number,
+    y1: number,
+    y2: number,
+    x3: number,
+    y3: number
+  ) {
     const nx1 = x1 - x2;
     const ny1 = y1 - y2;
     const nx2 = x3 - x2;
@@ -36,14 +72,40 @@ class DrawAngle {
     if (lineAngle1 < lineAngle2) {
       lineAngle1 += Math.PI * 2;
     }
+    return { lineAngle1, lineAngle2 };
+  }
 
+  /**
+   * Calculate the arc's radius and render it
+   * @param ctx - canvas context
+   * @param x2 - middle point x
+   * @param y2 - middle point y
+   * @param x1 - line 1 end x
+   * @param y1 - line 1 end y
+   * @param x3 - line 2 end x
+   * @param y3 - line 2 end y
+   * @param lineAngle1 - slope angle of line 1
+   * @param lineAngle2 - slope angle of line 2
+   * @private
+   */
+  private renderArc(
+    ctx: CanvasRenderingContext2D,
+    x2: number,
+    y2: number,
+    x1: number,
+    y1: number,
+    x3: number,
+    y3: number,
+    lineAngle1: number,
+    lineAngle2: number
+  ) {
     // get lines midpoints
     const [a1, b1] = this.midpoint([x2, y2], [x1, y1]);
     const [a2, b2] = this.midpoint([x2, y2], [x3, y3]);
 
     // convert midpoints to radius
-    const midpoint1 = Math.sqrt( Math.pow((x2 - a1), 2) + Math.pow((y2 - b1), 2) )
-    const midpoint2 = Math.sqrt( Math.pow((x2 - a2), 2) + Math.pow((y2 - b2), 2) )
+    const midpoint1 = Math.sqrt(Math.pow((x2 - a1), 2) + Math.pow((y2 - b1), 2))
+    const midpoint2 = Math.sqrt(Math.pow((x2 - a2), 2) + Math.pow((y2 - b2), 2))
 
     // use the smaller radius of the two
     const arcRadius = midpoint1 > midpoint2 ? midpoint2 : midpoint1;
@@ -54,7 +116,24 @@ class DrawAngle {
     ctx.moveTo(x2, y2);
     ctx.arc(x2, y2, arcRadius, lineAngle1, lineAngle2);
     ctx.fill();
+  }
 
+  /**
+   *
+   * @param lineAngle1 - slope angle of line 1
+   * @param lineAngle2 - slope angle of line 2
+   * @param x2 - middle point x position
+   * @param y2 - middle point y position
+   * @param ctx - canvas context
+   * @private
+   */
+  private renderAngleText(
+    lineAngle1: number,
+    lineAngle2: number,
+    x2: number,
+    y2: number,
+    ctx: CanvasRenderingContext2D
+  ) {
     // get the angle in degrees
     const angle = (360 - (lineAngle1 - lineAngle2) * (180 / Math.PI)).toFixed(1);
 
@@ -63,17 +142,13 @@ class DrawAngle {
     let textFactor: number;
     if (n < 10) {
       textFactor = (45 / n) * 50;
-    }
-    else if (n < 20) {
+    } else if (n < 20) {
       textFactor = (70 / n) * 50;
-    }
-    else if (n < 60) {
+    } else if (n < 60) {
       textFactor = (80 / n) * 50
-    }
-    else if (n < 90) {
+    } else if (n < 90) {
       textFactor = (100 / n) * 50
-    }
-    else {
+    } else {
       textFactor = (120 / n) * 50
     }
 
@@ -97,7 +172,29 @@ class DrawAngle {
       mx,
       my,
     )
+  }
 
+  /**
+   * Render two vectors.
+   * Calculate arrowheads positions and angles and render them.
+   * @param ctx - canvas context
+   * @param x3 - second point x position
+   * @param y3 - second point y position
+   * @param x2 - middle point x
+   * @param y2 - middle point y
+   * @param x1 - first point x position
+   * @param y1 - first point y position
+   * @private
+   */
+  private renderVectors(
+    ctx: CanvasRenderingContext2D,
+    x3: number,
+    y3: number,
+    x2: number,
+    y2: number,
+    x1: number,
+    y1: number
+  ) {
     // render the lines
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
@@ -109,13 +206,8 @@ class DrawAngle {
     ctx.stroke();
 
     // render arrowheads
-    let endRadians1 = Math.atan((y1 - y2) / (x1 - x2));
-    endRadians1 += ((x1 > x2) ? 90 : -90) * Math.PI / 180;
-    this.drawArrow(ctx, x1, y1, endRadians1);
-
-    let endRadians2 = Math.atan((y3 - y2) / (x3 - x2));
-    endRadians2 += ((x3 > x2) ? 90 : -90) * Math.PI / 180;
-    this.drawArrow(ctx, x3, y3, endRadians2);
+    this.drawArrow(ctx, x2, y2, x1, y1);
+    this.drawArrow(ctx, x2, y2, x3, y3);
   }
 
   /**
@@ -127,25 +219,31 @@ class DrawAngle {
     [(x1 + x2) / 2, (y1 + y2) / 2];
 
   /**
-   * Draw the lines' arrowheads
-   * @param ctx - canvas context
-   * @param x - x position of arrow
-   * @param y - y position of arrow
-   * @param radians - angle of the arrow
+   * Calculate arrowhead position and angle,
+   * and render it.
+   * @param ctx
+   * @param mx
+   * @param my
+   * @param endX
+   * @param endY
    */
   private drawArrow = (
     ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    radians: number
+    mx: number,
+    my: number,
+    endX: number,
+    endY: number
   ) => {
+    let radians = Math.atan((endY - my) / (endX - mx));
+    radians += ((endX > mx) ? 90 : -90) * Math.PI / 180;
+
     ctx.save();
     ctx.beginPath();
-    ctx.translate(x,y);
+    ctx.translate(endX, endY);
     ctx.rotate(radians);
-    ctx.moveTo(0,-5);
-    ctx.lineTo(10,20);
-    ctx.lineTo(-10,20);
+    ctx.moveTo(0, -5);
+    ctx.lineTo(10, 20);
+    ctx.lineTo(-10, 20);
     ctx.closePath();
     ctx.restore();
     ctx.fill();
