@@ -1,17 +1,18 @@
 import React from 'react';
 import './Thanx.css';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { ROUTES, TEXTS } from '../../utils/constants';
 
 const Thanx: React.FC = () => {
+  const { thanx } = TEXTS;
   return (
     <div className="tnx">
-      <h2>Thank You</h2>
+      <h2>{thanx.tnx}</h2>
       <p>
-        <span>Back to</span>
+        <span>{thanx.back}</span>
         {' '}
         <Link to={ROUTES.HOME}>
-          Home Page
+          {thanx.to}
         </Link>
       </p>
     </div>
