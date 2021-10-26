@@ -1,10 +1,10 @@
-export enum ROUTES {
+export enum Routes {
   HOME = '/',
   ANGLES = '/angles',
   TNX = '/thanx'
 }
 
-export enum TNX_TEXTS {
+export enum TnxTexts {
   tnx = 'Thank You',
   back = 'Back to',
   to = 'Home Page'

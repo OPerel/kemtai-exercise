@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './AnglesView.css';
 import { useHistory } from 'react-router-dom';
-import { ROUTES } from "../../utils/constants";
+import { Routes } from "../../utils/constants";
 import AngleCounter from "../AngleCounter/AngleCounter";
 import PieClock from "../PieClock/PieClock";
 import RandomAngle from "../RandomAngle/RandomAngle";
@@ -13,7 +13,7 @@ const AnglesView: React.FC = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      history.push(ROUTES.TNX);
+      history.push(Routes.TNX);
     }, 1000 * 60);
 
     const interval = setInterval(() => {

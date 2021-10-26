@@ -1,11 +1,11 @@
 import React from 'react';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../utils/constants';
 
 const HomePage: React.FC = () => (
   <div className="logo">
-    <Link to={ROUTES.ANGLES}>
+    <Link to={Routes.ANGLES}>
       <img
         src="https://app.kemtai.com/images/logo.png"
         alt="logo"

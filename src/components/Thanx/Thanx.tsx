@@ -1,16 +1,16 @@
 import React from 'react';
 import './Thanx.css';
 import { Link } from 'react-router-dom';
-import { ROUTES, TNX_TEXTS } from '../../utils/constants';
+import { Routes, TnxTexts } from '../../utils/constants';
 
 const Thanx: React.FC = () => (
   <div className="tnx">
-    <h2>{TNX_TEXTS.tnx}</h2>
+    <h2>{TnxTexts.tnx}</h2>
     <p>
-      <span>{TNX_TEXTS.back}</span>
+      <span>{TnxTexts.back}</span>
       {' '}
-      <Link to={ROUTES.HOME}>
-        {TNX_TEXTS.to}
+      <Link to={Routes.HOME}>
+        {TnxTexts.to}
       </Link>
     </p>
   </div>

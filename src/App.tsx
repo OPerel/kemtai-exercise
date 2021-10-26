@@ -8,14 +8,14 @@ import {
 import AnglesView from './components/AnglesView/AnglesView';
 import HomePage from './components/HomePage/HomePage';
 import Thanx from "./components/Thanx/Thanx";
-import { ROUTES } from './utils/constants';
+import { Routes } from './utils/constants';
 
 const App: React.FC = () => (
   <Router>
     <Switch>
-      <Route exact path={ROUTES.HOME} component={HomePage} />
-      <Route exact path={ROUTES.ANGLES} component={AnglesView}  />
-      <Route exact path={ROUTES.TNX} component={Thanx} />
+      <Route exact path={Routes.HOME} component={HomePage} />
+      <Route exact path={Routes.ANGLES} component={AnglesView}  />
+      <Route exact path={Routes.TNX} component={Thanx} />
     </Switch>
   </Router>
 );
