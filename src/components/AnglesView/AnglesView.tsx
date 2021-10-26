@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ROUTES } from "../../utils/constants";
 import AngleCounter from "../AngleCounter/AngleCounter";
 import PieClock from "../PieClock/PieClock";
+import RandomAngle from "../RandomAngle/RandomAngle";
 
 const AnglesView: React.FC = () => {
 
@@ -32,6 +33,7 @@ const AnglesView: React.FC = () => {
         <AngleCounter anglesCount={intervalCounter} />
         <PieClock />
       </div>
+      <RandomAngle counter={intervalCounter} />
     </div>
   );
 };
