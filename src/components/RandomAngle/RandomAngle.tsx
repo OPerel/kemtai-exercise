@@ -19,8 +19,7 @@ const RandomAngle: React.FC<RandomAngleProps> = ({ counter }) => {
   // draw a new angle every time the counter changes
   useEffect(() => {
     if (canvasRef.current) {
-      const Draw = new DrawAngle(canvasRef.current);
-      Draw.draw();
+      DrawAngle.draw(canvasRef.current);
     }
   }, [counter]);
 

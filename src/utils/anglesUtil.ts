@@ -1,25 +1,20 @@
-/**
- * Calculate and draw an angle's lines and arc based on 3 random points
- */
 class DrawAngle {
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
 
-  constructor(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  }
-
-  public draw() {
+  /**
+   * Calculate and draw an angle's lines and arc based on 3 random points
+   * @param canvas - the canvas element
+   */
+  public draw(canvas: HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     // clear the canvas before next paint
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // get 3 random points
     const [
       [x1, y1],
       [x2, y2],
       [x3, y3]
-    ] = this.getRandomPoints(this.canvas.width, this.canvas.height);
+    ] = this.getRandomPoints(canvas.width, canvas.height);
 
     // get vectors from x2,y2 to the other points
     const nx1 = x1 - x2;
@@ -54,11 +49,11 @@ class DrawAngle {
     const arcRadius = midpoint1 > midpoint2 ? midpoint2 : midpoint1;
 
     // render the arc
-    this.ctx.fillStyle = "pink";
-    this.ctx.beginPath();
-    this.ctx.moveTo(x2, y2);
-    this.ctx.arc(x2, y2, arcRadius, lineAngle1, lineAngle2);
-    this.ctx.fill();
+    ctx.fillStyle = "pink";
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.arc(x2, y2, arcRadius, lineAngle1, lineAngle2);
+    ctx.fill();
 
     // get the angle in degrees
     const angle = (360 - (lineAngle1 - lineAngle2) * (180 / Math.PI)).toFixed(1);
@@ -93,34 +88,34 @@ class DrawAngle {
     }
 
     // render the angle text
-    this.ctx.fillStyle = "black";
-    this.ctx.font = "24px arial";
-    this.ctx.textAlign = "center";
-    this.ctx.textBaseline = "middle";
-    this.ctx.fillText(
+    ctx.fillStyle = "black";
+    ctx.font = "24px arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(
       angle + String.fromCharCode(176),
       mx,
       my,
     )
 
     // render the lines
-    this.ctx.strokeStyle = "black";
-    this.ctx.lineWidth = 3;
-    this.ctx.lineJoin = "round";
-    this.ctx.beginPath();
-    this.ctx.moveTo(x3, y3);
-    this.ctx.lineTo(x2, y2);
-    this.ctx.lineTo(x1, y1);
-    this.ctx.stroke();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(x3, y3);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
 
     // render arrowheads
     let endRadians1 = Math.atan((y1 - y2) / (x1 - x2));
     endRadians1 += ((x1 > x2) ? 90 : -90) * Math.PI / 180;
-    this.drawArrow(this.ctx, x1, y1, endRadians1);
+    this.drawArrow(ctx, x1, y1, endRadians1);
 
     let endRadians2 = Math.atan((y3 - y2) / (x3 - x2));
     endRadians2 += ((x3 > x2) ? 90 : -90) * Math.PI / 180;
-    this.drawArrow(this.ctx, x3, y3, endRadians2);
+    this.drawArrow(ctx, x3, y3, endRadians2);
   }
 
   /**
@@ -164,9 +159,9 @@ class DrawAngle {
   private getRandomPoints = (w: number, h: number) => {
     const min = 0;
     return [
-      [this.getRandomArbitrary(0, w), this.getRandomArbitrary(min, h)],
-      [this.getRandomArbitrary(0, w), this.getRandomArbitrary(min, h)],
-      [this.getRandomArbitrary(0, w), this.getRandomArbitrary(min, h)]
+      [this.getRandomArbitrary(min, w), this.getRandomArbitrary(min, h)],
+      [this.getRandomArbitrary(min, w), this.getRandomArbitrary(min, h)],
+      [this.getRandomArbitrary(min, w), this.getRandomArbitrary(min, h)]
     ]
   }
 
@@ -180,4 +175,4 @@ class DrawAngle {
 
 }
 
-export default DrawAngle;
+export default new DrawAngle();
