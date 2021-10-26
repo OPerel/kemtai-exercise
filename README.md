@@ -21,6 +21,8 @@
 #### Thank You Page
 ![thankx](./thank_you-Desktop.png)
 
+__* Mobile screen recording also available (`./Mobile-screen-recording.mp4`).__
+ 
 ## Run Locally
 ```bash
 git clone https://github.com/OPerel/kemtai-exercise.git
