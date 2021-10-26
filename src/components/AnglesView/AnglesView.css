@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   max-width: 100vw;
-  height: 15vh;
+  height: 115px;
   padding: 0 3%;
   background: linear-gradient(90deg, rgba(232,225,220,1) 0%, rgba(232,228,219,1) 37%, rgba(171,153,123,1) 100%);
 }

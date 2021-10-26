@@ -61,7 +61,7 @@ export default function drawAngle (canvas: HTMLCanvasElement) {
   const n = Number(angle);
   let textFactor: number;
   if (n < 10) {
-    textFactor = (60 / n) * 50;
+    textFactor = (45 / n) * 50;
   }
   else if (n < 20) {
     textFactor = (70 / n) * 50;
@@ -82,7 +82,7 @@ export default function drawAngle (canvas: HTMLCanvasElement) {
 
   // if angle is smaller than 5deg, render text at upper left corner
   if (n < 5) {
-    mx = 5;
+    mx = 30;
     my = 30;
   }
 

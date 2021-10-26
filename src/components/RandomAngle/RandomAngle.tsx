@@ -47,7 +47,7 @@ const getCanvasSize = () => {
   const w = window.innerWidth;
   const h = window.innerHeight;
   return {
-    width: w - ((10 / 100) * w),
-    height: h - ((15 / 100) * h)
+    width: w - ((5 / 100) * w),
+    height: h - ((20 / 100) * h)
   }
 }
